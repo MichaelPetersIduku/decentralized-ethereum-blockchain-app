@@ -1,10 +1,10 @@
-# Topics & Questions API
-Creates an index over questions and topics gotten from a sheet and stores the data in a mongodb database. Exposes a RESTful API endpoint to query the topics in the database and returns the questions associated with the topic
+# Decentralized Ethereum BlockChain Application
+This is a decentralised application on Ethereum blockchain with a backend service that handles the business logic and data storage for the application.
 
 This repo is functionality complete — PRs and issues welcome!
 
 # Demo Url
-https://topics-questions-api.herokuapp.com
+https://decentralized-ethereum-blockcahin-api.herokuapp.com
 
 # Getting started
 
@@ -12,7 +12,7 @@ To get the Node server running locally:
 
 - Clone this repo
 - `npm install` to install all required dependencies
-- `npm run start:prod` to start the local server on production mode
+- `npm run start` to start the local server
 
 # API Documentation
 Click the link for API documentation with available routes and request response examples: https://documenter.getpostman.com/view/6889344/UyxnFRJR
@@ -32,9 +32,6 @@ Click the link for API documentation with available routes and request response 
 - [winston](github.com/winstonjs/winston) - For logging anything
 
 ## Application Structure
-
-- `.secreta/` Folder containing secreta.json and config.js files for managing secrets and config files. This folder is used in place of .env files to manage secrets
-- `.vscode/` For managing vs code workspace
 - `logs/` This is where all log files are stored
 - `scripts/` Contains predeploy scripts
 - `src/@core/common/` where all universal files with generic functions that can be called from other files when extended
@@ -54,9 +51,6 @@ Click the link for API documentation with available routes and request response 
 
 In `src/@core/common/universal.service.ts`, we define failureResponse and serviceErrorHandler functions for returning the errors with their respective status codes and error messages. Service files for the different modules under `src/api/` folder extends the universal.service.ts file to return the necccessary errors in this file.
 In `src/@core/common/universal.controller.ts`, we define controllerErrorHandler function to handle errors from the controller classes which extends this universal.controller.ts file
-
-## Authentication
-No authorization is required for this API
 
 
 <br />
