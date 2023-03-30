@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 
-const { MONGODB_URL } = process.env;
+const MONGODB_URL_LOCAL = 'mongodb://localhost:27017/ethereum_blockchain';
+const MONGODB_URL = process.env.MONGODB_URL || MONGODB_URL_LOCAL;
 const { connection } = mongoose;
-
+console.log("MONGODB_URL", process.env);
 export const connectMongo = () => {
-  // mongoose.connect(MONGODB_URL, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  //   useCreateIndex: true,
-  //   useFindAndModify: false,
-  //   autoIndex: true,
-  // });
+  mongoose.connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    autoIndex: true,
+  });
 };
 
 connection.on("error", (error: any) => {
