@@ -1,10 +1,13 @@
-require('dotenv').config();
+require("dotenv").config();
 import express, { Request, Response, Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 
 import logger from "./util/logger/logger";
 import { connectMongo } from "./@core/database/database.mongo";
+
+import { accountsRouter } from "./api/accounts/accounts.route";
+import { transactionsRouter } from "./api/transactions/transactions.route";
 
 // create express server
 const app: Application = express();
@@ -34,7 +37,8 @@ process.on("unhandledRejection", (e: any) => {
 connectMongo();
 
 //Routes
-// app.use("/api/v1/questions", questionsRouter);
+app.use("/api/v1/accounts", accountsRouter);
+app.use("/api/v1/transactions", transactionsRouter);
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(200).json({

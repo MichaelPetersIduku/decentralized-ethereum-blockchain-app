@@ -42,6 +42,7 @@
     "node-fetch": "^2.6.7",
     "randomatic": "^3.1.1",
     "uuid": "^8.3.2",
+    "web3": "^1.9.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
