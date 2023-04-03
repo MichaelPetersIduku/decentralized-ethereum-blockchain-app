@@ -26,7 +26,7 @@ export class TransactionsService extends UniversalsService {
   };
 
   public getTransactions = async (meta, req): Promise<IResponse> => {
-    const { from, to, txHash } = req.body;
+    const { from, to, txHash } = req.query;
     try {
       const dbQuery = Utils.cleanObject({ from, to, txHash });
       const dbTransactions = await Transaction.find(dbQuery);
