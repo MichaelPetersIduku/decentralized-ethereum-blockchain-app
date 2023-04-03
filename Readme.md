@@ -22,9 +22,9 @@ To get the Node server running locally:
 - `npm run start` to start the local server
 - `npm run test` to run test cases
 - Create a .env file in the project root directory and ensure the following env variables are specified
-  - MONGODB_URL
-  - ETHEREUM_PROVIDER_WS
-  - PRIVATE_KEY
+  - MONGODB_URL // mongo db connectring string e.g mongodb+srv://USERNAME:PASSWORD@ethereum.bv5ij.mongodb.net/ethereum
+  - ETHEREUM_PROVIDER_WS // Websocket Ethereum provider e.g wss://mainnet.infura.io/ws/v3/PROJECT_ID
+  - PRIVATE_KEY // private key to an ethereum account
 
 # API Documentation
 Click the link for API documentation with available routes and request examples: [https://documenter.getpostman.com/view/6889344/UyxnFRJR
