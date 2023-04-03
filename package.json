@@ -4,7 +4,7 @@
   "description": "A decentralized application on Ethereum blockchain",
   "main": "server.ts",
   "scripts": {
-    "prestart": "npm run build && node dist/check-env MONGODB_URL ETHEREUM_PROVIDER_WS PRIVATE_KEY",
+    "prestart": "node dist/check-env MONGODB_URL ETHEREUM_PROVIDER_WS PRIVATE_KEY",
     "start": "node dist/src/server.js",
     "build": "npm run prepare && npm run rm-dist && npm run build-ts && npm run copy-assets",
     "serve": "node dist/src/server.js",
