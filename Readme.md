@@ -20,6 +20,7 @@ To get the Node server running locally:
 - Clone this repo
 - `npm install` to install all required dependencies
 - `npm run start` to start the local server
+- `npm run test` to run test cases
 
 # API Documentation
 Click the link for API documentation with available routes and request examples: [https://documenter.getpostman.com/view/6889344/UyxnFRJR
