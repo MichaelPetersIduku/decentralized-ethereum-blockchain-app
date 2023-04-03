@@ -2,6 +2,7 @@
 This is a decentralised application on Ethereum blockchain with a backend service that handles the business logic and data storage for the application.
 More update can still be made such as:
 - Adding a workflow file to deploy to AWS Lambda
+- Validate incoming request using joi validator
 - Add unit test cases for functions in Web3ConnectionClass and services class
 - Create route for creating more accounts on the blockchain
 - Encrypt the private keys and use them to sign transactions
@@ -21,8 +22,8 @@ To get the Node server running locally:
 - `npm run start` to start the local server
 
 # API Documentation
-Click the link for API documentation with available routes and request response examples: https://documenter.getpostman.com/view/6889344/UyxnFRJR
-
+Click the link for API documentation with available routes and request examples: [https://documenter.getpostman.com/view/6889344/UyxnFRJR
+](https://documenter.getpostman.com/view/6889344/2s93RWPB9z)
 # Code Overview
 
 ## Dependencies
@@ -31,7 +32,6 @@ Click the link for API documentation with available routes and request response 
 - [base-64](github.com/mathiasbynens/base64) - For encoding and decoding url strings
 - [body-parser](github.com/expressjs/body-parser) - Node js body parsing middleware
 - [cors](github.com/expressjs/cors) - Used to enable cors with various options
-- [joi](github.com/sideway/joi) - Object schema validation
 - [mongoose](https://www.npmjs.com/package/mongoose) - Nodejs ORM for mongodb
 - [mongoose-paginate-v2](https://www.npmjs.com/package/mongoose-paginate-v2) - A custom pagination library for Mongoose with customizable labels
 - [secreta](https://www.npmjs.com/package/secreta) - For managing secret keys and config
