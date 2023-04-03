@@ -25,6 +25,9 @@
     "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
     "code:check:rules": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },
+  "engines": {
+    "node": "v19.2.0"
+  },
   "keywords": [
     "API"
   ],

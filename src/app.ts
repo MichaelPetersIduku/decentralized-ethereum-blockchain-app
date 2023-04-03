@@ -22,8 +22,6 @@ app.use(
   })
 );
 
-app.use(express.static("public"))
-
 // set up error handler
 process.on("uncaughtException", (e: any) => {
   logger.log("error", e);
