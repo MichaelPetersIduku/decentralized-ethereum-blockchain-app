@@ -1,10 +1,16 @@
 # Decentralized Ethereum BlockChain Application
 This is a decentralised application on Ethereum blockchain with a backend service that handles the business logic and data storage for the application.
+More update can still be made such as:
+- Adding a workflow file to deploy to AWS Lambda
+- Add unit test cases for functions in Web3ConnectionClass and services class
+- Create route for creating more accounts on the blockchain
+- Encrypt the private keys and use them to sign transactions
+
 
 This repo is functionality complete — PRs and issues welcome!
 
 # Demo Url
-https://decentralized-ethereum-blockcahin-api.herokuapp.com
+https://decentralized-ethereum-app.herokuapp.com
 
 # Getting started
 
