@@ -8,4 +8,4 @@ accountsRouter.get("/", new AccountsController().getAccounts);
 
 accountsRouter.post("/", new AccountsController().createAccount);
 
-accountsRouter.get("/balance/:accounts", new AccountsController().getAccountBalance);
+accountsRouter.get("/balance/:account", new AccountsController().getAccountBalance);

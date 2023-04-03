@@ -15,8 +15,14 @@ export class AccountsService extends UniversalsService {
 
   public createAccount = async (meta, req): Promise<IResponse> => {
     try {
-        
-      return this.successResponse("Successful", accounts);
+        const response: IResponse = await Web3ConnectionClass.createAccount();
+        if (response.status) {
+          const { address, privateKey } = response.data;
+          const account = await Account.create({ address, privateKey, name: "Test account"})
+          return this.successResponse(response.message, account);
+        } else {
+          return this.failureResponse(response.message, response.data)
+        }
     } catch (error) {
       return this.serviceErrorHandler(req, error);
     }
@@ -25,9 +31,13 @@ export class AccountsService extends UniversalsService {
   public getAccountBalance = async (meta, req): Promise<IResponse> => {
     const { account } = req.params;
     try {
-        const balance = await Web3ConnectionClass.getAccountBalance(account);
-
-      return this.successResponse("Successful", { account, balance });
+        const response: IResponse = await Web3ConnectionClass.getAccountBalance(account);
+        if (response.status) {
+          const balance = response.data;
+          return this.successResponse(response.message, { account, balance });
+        } else {
+          return this.failureResponse(response.message, response.data);
+        }
     } catch (error) {
       return this.serviceErrorHandler(req, error);
     }

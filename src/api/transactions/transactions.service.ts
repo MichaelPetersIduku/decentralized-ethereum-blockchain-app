@@ -10,16 +10,16 @@ export class TransactionsService extends UniversalsService {
   public signTransactions = async (meta, req): Promise<IResponse> => {
     const { from, to, value } = req.body;
     try {
-      const txHash = await Web3ConnectionClass.signTransaction({
-        from,
-        to,
-        value,
-      });
+      const response: IResponse = await Web3ConnectionClass.signTransaction({from, to, value});
 
-      const dbTx = new Transaction({ from, to, value, txHash });
-      const txn = await dbTx.save();
+      if (response.status) {
+        const dbTx = new Transaction({ from, to, value, txHash: response.data.transactionHash });
+        const txn = await dbTx.save();
 
-      return this.successResponse("Successful", txn);
+        return this.successResponse(response.message, txn);
+      } else {
+        return this.failureResponse(response.message, response.data);
+      }
     } catch (error) {
       return this.serviceErrorHandler(req, error);
     }

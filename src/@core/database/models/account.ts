@@ -4,7 +4,9 @@ import mongoosePaginate from "mongoose-paginate-v2";
 export const AccountSchema = new Schema(
   {
     address: { type: String, unique: true, dropDups: true },
+    privateKey: String,
     name: String
+
   },
   { timestamps: true }
 );

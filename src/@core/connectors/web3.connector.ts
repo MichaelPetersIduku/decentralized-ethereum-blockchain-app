@@ -1,5 +1,7 @@
 import Web3 from "web3";
 import { Transaction } from "web3-core";
+import { UniversalsService } from "../common/universals.service";
+import { IResponse } from "../common/response";
 
 const ETHEREUM_PROVIDER_WS = process.env.ETHEREUM_PROVIDER_WS || "";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
@@ -9,13 +11,14 @@ const Web3Connection = new Web3(
 );
 const Web3Utils = Web3Connection.utils;
 
-export class Web3ConnectionClass {
+export class Web3ConnectionClass extends UniversalsService {
 
   public static signTransaction = async (transaction: {
     from: string;
     to: string;
     value: number;
-  }): Promise<string> => {
+  }): Promise<IResponse> => {
+    try {
     const nonce = await Web3Connection.eth.getTransactionCount(transaction.from);
 
     const gasPrice = await Web3Connection.eth.getGasPrice();
@@ -29,17 +32,25 @@ export class Web3ConnectionClass {
       gasLimit: GAS_LIMIT,
     };
 
-    const signedTx = await Web3Connection.eth.accounts.signTransaction(tx,`0x${PRIVATE_KEY}`);
+    const signedTx = await Web3Connection.eth.accounts.signTransaction(tx,`${PRIVATE_KEY}`);
 
     const receipt = await Web3Connection.eth.sendSignedTransaction(signedTx.rawTransaction || "");
 
-    return receipt.transactionHash;
+    return new Web3ConnectionClass().successResponse("Successful", receipt);
+  } catch(error: any) {
+    return new Web3ConnectionClass().failureResponse(error.message, error);
+  }
   };
 
-  public static getAccountBalance = async (account: string): Promise<string> => {
-    const balance = await Web3Connection.eth.getBalance(account);
-    const etherBalance = Web3Utils.fromWei(balance, 'ether');
-    return etherBalance;
+  public static getAccountBalance = async (account: string): Promise<IResponse> => {
+    try {
+      const balance = await Web3Connection.eth.getBalance(account);
+      const etherBalance = Web3Utils.fromWei(balance, 'ether');
+      return new Web3ConnectionClass().successResponse("Successful", etherBalance);
+    } 
+    catch(error: any) {
+      return new Web3ConnectionClass().failureResponse(error.message, error);
+    }
   }
 
   public static getTransaction = async (txHash: string): Promise<Transaction> => {
@@ -47,8 +58,12 @@ export class Web3ConnectionClass {
     return transaction;
   }
 
-  public static createAccount = async () => {
-    const { address, privateKey } = Web3Connection.eth.accounts.create();
-    return { address, privateKey };
+  public static createAccount = async (): Promise<IResponse> => {
+    try {
+      const { address, privateKey } = Web3Connection.eth.accounts.create();
+      return new Web3ConnectionClass().successResponse("Successful", { address, privateKey });
+    } catch (error: any) {
+      return new Web3ConnectionClass().failureResponse(error.message, error);
+    }
   }
 }
