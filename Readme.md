@@ -21,6 +21,10 @@ To get the Node server running locally:
 - `npm install` to install all required dependencies
 - `npm run start` to start the local server
 - `npm run test` to run test cases
+- Create a .env file in the project root directory and ensure the following env variables are specified
+  - MONGODB_URL
+  - ETHEREUM_PROVIDER_WS
+  - PRIVATE_KEY
 
 # API Documentation
 Click the link for API documentation with available routes and request examples: [https://documenter.getpostman.com/view/6889344/UyxnFRJR
