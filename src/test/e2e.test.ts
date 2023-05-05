@@ -17,7 +17,7 @@ describe('API endpoints', () => {
     sandbox = Sinon.createSandbox();
     server = app.listen(3000);
     mongoServer = await MongoMemoryServer.create();
-    connectMongo(mongoServer.getUri());
+    connectMongo(mongoServer.getUri(), ()=>{});
   });
 
   afterAll(async () => {
