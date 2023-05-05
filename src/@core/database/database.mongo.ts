@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 
-const MONGODB_URL_LOCAL = 'mongodb://localhost:27017/ethereum_blockchain';
-const MONGODB_URL = process.env.MONGODB_URL || MONGODB_URL_LOCAL;
 const { connection } = mongoose;
-export const connectMongo = (url?) => {
-  mongoose.connect(url || MONGODB_URL, {
+export const connectMongo = async (url, callback) => {
+  await mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
     autoIndex: true,
   });
+  callback(connection);
 };
+
+export class MongooseConnectionType extends mongoose.Connection {}
 
 connection.on("error", (error: any) => {
   console.log(`MongoDB database connection error: ${error}`);

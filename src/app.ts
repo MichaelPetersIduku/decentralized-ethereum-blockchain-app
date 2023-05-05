@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import logger from "./util/logger/logger";
-import { connectMongo } from "./@core/database/database.mongo";
+import { connectMongo, MongooseConnectionType } from "./@core/database/database.mongo";
 
 import { accountsRouter } from "./api/accounts/accounts.route";
 import { transactionsRouter } from "./api/transactions/transactions.route";
@@ -21,6 +21,21 @@ app.use(
     limit: "50mb",
   })
 );
+const MONGODB_URL_LOCAL = 'mongodb://localhost:27017/ethereum_blockchain';
+const MONGODB_URL = process.env.MONGODB_URL || MONGODB_URL_LOCAL;
+
+app.use(async function (req, res, next) {
+  // connect mongo database
+  await connectMongo(MONGODB_URL, (connection: MongooseConnectionType) => {
+    res.on("finish", async function () {
+      if (connection.readyState === 1) {
+        await connection.close();
+      }
+    });
+  });
+
+  next();
+});
 
 // set up error handler
 process.on("uncaughtException", (e: any) => {
@@ -32,9 +47,6 @@ process.on("unhandledRejection", (e: any) => {
   logger.log("error", e);
   process.exit(1);
 });
-
-// connect mongo database
-connectMongo();
 
 //Routes
 app.use("/api/v1/accounts", accountsRouter);
